@@ -66,8 +66,21 @@ public class Noticia {
 
 	}
 
-	public void addItem(Document xmlTree) {
+	public Element addItem(Document xmlDomTree) {
+		Element itemElement = xmlDomTree.createElement("item");
 
+		addElement(xmlDomTree, itemElement, "title", this.title);
+		addElement(xmlDomTree, itemElement, "description", this.description);
+		addElement(xmlDomTree, itemElement, "link", this.link);
+		addElement(xmlDomTree, itemElement, "pubDate", this.pubDate);
+
+		return itemElement;
+	}
+
+	public void addElement(Document xmlDomTree, Element item, String tag, String content) {
+		Element element = xmlDomTree.createElement(tag);
+		element.setTextContent(content);
+		item.appendChild(element);
 	}
 
 	public String getTitle() {
